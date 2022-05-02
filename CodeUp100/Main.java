@@ -6,6 +6,7 @@ public class Main {
 
         int n = sc.nextInt();
         char ch = sc.next().charAt(0);
+        sc.close();
             
         System.out.print("hello");    //1001
         System.out.print("Hello World");    //1002
