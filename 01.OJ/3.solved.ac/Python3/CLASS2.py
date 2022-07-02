@@ -1,4 +1,4 @@
-# 1018번: 체스판 다시 칠하기 [실버4]
+# 1018 체스판 다시 칠하기
 """
 [입력] 
 n개의 문자열을 입력받는다.
@@ -35,7 +35,7 @@ def sol1018():
             cnt.append(min(blackCase,whiteCase))
     print(min(cnt))
 
-# 1065번: 직사각형에서 탈출 [브론즈3]
+# 1065 직사각형에서 탈출
 """
 [입력]
 4개 숫자 입력
@@ -49,7 +49,7 @@ def sol1065():
     l=[ x, w-x, y, h-y ]
     print(min(l))
 
-# 1181번: 단어 정렬 [실버5]
+# 1181 단어 정렬
 """
 [입력]
 입력받은 숫자만큼 반복하여 문자 입력
@@ -70,7 +70,27 @@ def sol1181():
     for word in wordList:
         print(word)
 
-            
+
+
+# 1259 팰린드롬수
+def sol1259():
+    n=1
+    nums=[]
+    while n!=0:
+        n = int(input())
+        if n==0:
+            break
+            nums.append()
+    
+    for num in nums:
+        if num%2==0:
+            for i in range(len(num)):
+                if num[i]==num[-1-i]:
+
+        else:
+
+    
+
 
         
 
