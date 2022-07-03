@@ -68,7 +68,7 @@ def sol1546():
 
     for i, v in enumerate(score_list):
         score_list[i]=(v/m)*100
-    
+
     print(sum(score_list)/n)
 
 # 2438 별 찍기 - 1
@@ -89,7 +89,7 @@ def sol2475():
 
     for i, v in enumerate(num_list):
         num_list[i]=v**2
-    
+
     print(sum(num_list)%10)
 
 # 2557 Hello World
@@ -102,7 +102,7 @@ def sol2562():
 
     for _ in range(9):
         nums.append(int(input()))
-    
+
     print(max(nums))
     print(nums.index(max(nums))+1)
 
@@ -149,6 +149,11 @@ def sol2742():
     for i in range(1,int(input())+1):
         print(i)
 
+# 2742 기찍 N
+def sol2742():
+    for i in range(int(input()),0,-1):
+        print(i)
+
 # 2753 윤년
 def sol2753():
     y=int(input())
@@ -167,7 +172,7 @@ def sol2753():
 # 2884 알람 시계
 def sol2884():
     h,m=map(int,input().split())
-    
+
     if m-45<0:
         m = 60+m-45
         if h==0:
@@ -299,11 +304,11 @@ def sol10871():
 # 10950 A+B - 3
 def sol10950():
     sums=[]
-    
+
     for _ in range(int(input())):
         a,b=map(int,input().split())
         sums.append(a+b)
-    
+
     for sum in sums:
         print(sum)
 
@@ -349,11 +354,3 @@ def sol11720():
         sum+=int(i)
 
     print(sum)
-    
-
-
-
-
-
-
-

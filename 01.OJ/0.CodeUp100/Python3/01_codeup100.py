@@ -1,4 +1,7 @@
 # 6001 : [기초-출력] 출력하기01(설명)(py)
+from asyncio.windows_events import NULL
+
+
 def sol6001():
     print("Hello")
 # 6002 : [기초-출력] 출력하기02(설명)(py)
@@ -567,24 +570,80 @@ def sol6095():
         for j in range(1,20):
             print(d[i][j], end=' ')
         print()
-# 6096 : [기초-리스트] 바둑알 십자 뒤집기(py)
+# 6096 [기초-리스트] 바둑알 십자 뒤집기(py)
 def sol6096():
+    d = [ list(map(int, input().split())) for _ in range(19) ]
 
-    for i in range(n) :
-        x,y=input().split()
-        for j in range(1, 20) :
-            if d[j][int(y)]==0 :
-                d[j][int(y)]=1
+    for i in range(int(input())):
+        x,y=map(int,input().split())
+        for j in range(19):
+            if d[j][y-1]==0:
+                d[j][y-1]=1
+            else:
+                d[j][y-1]=0
+
+            if d[x-1][j]==0:
+                d[x-1][j]=1
             else :
-                d[j][int(y)]=0
+                d[x-1][j]=0
 
-        if d[int(x)][j]==0 :
-            d[int(x)][j]=1
-        else :
-            d[int(x)][j]=0
+    for i in range(19):
+        for j in range(19):
+            print(d[i][j],end=" ")
+        print()
 
-            
-#
+# 6097 [기초-리스트] 설탕과자 뽑기(py)
 def sol6097():
-#
+    h,w = map(int, input().split())
+    sticks=list(list(map(int,input().split())) for _ in range(int(input())))
+
+    game=[[0]*w for _ in range(h)]
+
+    for stick in sticks:
+        l = stick[0]
+        d = stick[1]
+        x = stick[2]
+        y = stick[3]
+        for i in range(l):
+            if d==0:
+                for a in range(y-1,y+l-1):
+                    game[x-1][a]=1
+            if d==1:
+                for a in range(x-1,x+l-1):
+                    game[a][y-1]=1
+
+    for i in range(h):
+        for j in range(w):
+            print(game[i][j],end=" ")
+        print()
+
+# 6098 [기초-리스트] 성실한 개미(py)
 def sol6098():
+    miro = list(list(map(int,input().split())) for _ in range(10))
+
+    x=1
+    y=1
+
+    for i in range(y,10):
+
+
+        if miro[i][x]==1:
+            break
+        if miro[i][x]==2:
+            miro[i][x]=9
+            break
+
+        for j in range(x,10):
+            if miro [i][j]==0:
+                miro[i][j]=9
+                x=j
+            if miro[i][j]==1:
+                break
+            if miro[i][j]==2:
+                miro[i][j]=9
+                break
+            
+    for i in range(10):
+        for j in range(10):
+            print(miro[i][j],end=" ")
+        print()
