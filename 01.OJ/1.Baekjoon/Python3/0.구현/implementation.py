@@ -1,6 +1,8 @@
 # https://www.acmicpc.net/problemset?sort=ac_desc&algo=102
 # 실버 5이상 위주로 다 풀기
 
+from email.utils import localtime
+from logging.config import valid_ident
 import sys
 input = sys.stdin.readline
 
@@ -187,29 +189,35 @@ def sol2941():
 
     print(len(word))
     print(cnt+len(word))
-sol2941()
-            
-            
-
-
-        
 
 # 1996 프린터 큐
 # https://www.acmicpc.net/problem/1966
-# '''
-# 1. 아이디어
-# - 
-# - 
-# - 
-# 2. 복잡도
-# 3. 자료구조
-# '''
-# from collections import deque
+'''
+1. 아이디어
+- 왼쪽부터 순서대로 큐와 비교하여 큰 값이 있으면 맨 뒤로 보낸다.
+2. 복잡도
+3. 자료구조
+'''
+from collections import deque
 
-# def sol1966():
-#     tc = int(input())
-#     for i in range(tc):
-        
+def sol1966():
+    tc_num= int(input())
+    for _ in range(tc_num):
+        n,m = map(int, input().split())
+        docs= deque(map(int, input().split()))
+        cnt=0
 
-
-    
+        while docs:
+            cnt+=1
+            if docs[m] != max(docs):
+                if docs[0] == max(docs):
+                    docs.popleft()
+                else:
+                    tmp=docs.popleft()
+                    docs.append(tmp)
+                    if cnt == m:
+                        print(cnt)
+                        break
+            else:
+                print(1)
+sol1966()
