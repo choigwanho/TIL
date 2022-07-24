@@ -4,13 +4,10 @@
 ```Python3
 1. 아이디어
 - 결과가 최소거리를 보장하는 BFS로 푼다.
-
 2. 복잡도
 - O(V+E) : 300*300 + 8*300*300 >> 가능
-
 3. 자료구조
 - 체스판: int[][]
-
 ```
 '''
 ### 해결 코드
@@ -35,10 +32,10 @@ for _ in range(T):
 
     while q:
         x, y = q.popleft()
-        if x == target_x and y == target_y:  
-                print(0)
-                break
-        
+        if x == target_x and y == target_y:
+            print(0)
+            break
+
         for i in range(8):
             nx, ny = x + dx[i], y + dy[i]
             if 0<= nx < I and 0<= ny < I and not chess[ny][nx]:
@@ -49,4 +46,4 @@ for _ in range(T):
 
         if ans:
             print(ans)
-            break   
+            break
