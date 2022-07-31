@@ -17,6 +17,7 @@
 '''
 ### 해결 코드
 
+""" from re import S
 import sys
 input = sys.stdin.readline
 
@@ -36,4 +37,24 @@ def recur(num):
             check[i] = False
             result.pop()
 
-recur(0)
+recur(0) """
+
+
+import sys
+si = sys.stdin.readline
+
+N, M = map(int, si().split())
+
+s = []
+def f():
+    if len(s) == M:
+        print(' '.join(map(str,s)))
+        return
+        
+    for i in range(1,N+1):
+        if i in s:
+            continue
+        s.append(i)
+        f()
+        s.pop()
+f()
