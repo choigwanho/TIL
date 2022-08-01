@@ -79,8 +79,35 @@ id_list = ["muzi", "frodo", "apeach", "neo"]
 report = ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"]
 k =2
 
+from collections import defaultdict
+
 def solution(id_list, report, k):
+    
+    dic_list = defaultdict(list) # 사용자: 신고한 사람들 list
+    dic_answer = defaultdict(int) # 사용자: 알림 받는 횟수
     answer = []
+
+    for i in set(report):
+        singo_user, penalty_user = i.split()
+        dic_list[penalty_user].append(singo_user) 
+    
+    for id in id_list:
+        if len(dic_list[id]) >= k: # 사용자를 신고한 사람수가 K(정지기준) 이상이면
+            for singo_user in dic_list[id]:
+               dic_answer[singo_user] +=1 # 신고한 사람에게 알림 +1
+    
+    for id in id_list: # 주어진 id_list 순으로 배열에 담는다.
+        answer.append(dic_answer[id])
+    
+    return answer
+
+    
+
+    
+
+
+    
+    
 
     
     return answer

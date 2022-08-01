@@ -105,7 +105,7 @@ i_index = [i for i in range(M) if S[i]=="I"]
 cnt = 0
 ans = 0
 
-for i in range(0,len(i_index)): # "I"가 2간격으로 N번 연속적인 경우 완전 탐색 
+for i in range(0,len(i_index)): # "I"가 2간격으로 N번 연속적인 경우 완전 탐색
     if i_index[i] - i_index[i-1] == 2:
         cnt += 1
     else: # I와 I의 거리가 2가 아닌경우 끊어준다.

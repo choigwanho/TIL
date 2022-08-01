@@ -134,27 +134,15 @@ OO.....
 
 ## 문제 분석
 1. 관찰
-- 폭탄위치 + 상하좌우 총 5칸이 파괴된다
-- 인접한 칸에 폭탄이 있는 경우 연쇄 반응이 없다.
-
-- N초가 흐른 후
-- 3초에 맨처음 폭탄이 터진다.
-- 3초가 되기 1초 전에 폭탄이 없는 모든 자리에 폭탄을 설치한다.
-
-
-n%3==0 인 경우,
-기존 폭탄과 상하좌우를 제외한 나머지를 폭탄으로 채우는 것을 몫만큼 반복한다.
-
-n%3==1 인 경우,
-빈칸에도 모두 폭탄을 채운다.
-
-n%==2 인 경우, 
-맨 처음의 상하좌우를 제외한 위치에 설치된 폭탄이 터지고,
-기존의 자리에 폭탄이 설치된다.
+- 첫 번째 폭탄이 터진 형태와 두 번째 폭탄이 터진 형태가 3번째 부터 반복된다.
+- 첫 폭탄 폭파 3,7,11...
+- 둘째 폭탄 폭파 5,9,14...
 
 2. 복잡도
+- O(R*C) = 200*200*8 >> 가능
 
 3. 자료 구조
+- 폭탄 배열: int[][]
 
 """
 
@@ -162,9 +150,36 @@ import sys
 si = sys.stdin.readline
 
 R, C, N = map(int, si().split())
-board = [[map(str, si().split())]for _ in range(R)]
+board = [list(si().strip()) for _ in range(R)]
 
-for i in range(R):
-    for j in range(C):
+
+if N<=1: # 첫 1초동안은 인풋을 출력
+    for li in board: print(''.join(li))
+elif N%2 == 0: # 짝수번째는 폭탄이 모두 차 있는 형태
+    for i in range(R): print('O'*C)
+else: # 첫 폭탄이 터진 이후 3번째 부터 형태가 반복된다. 3,7,11 ... 과 5,9,13...
+
+    bom_1 = [["O"]*C for _ in range(R)] # 첫 폭탄 터짐 
+    for i in range(R):
+        for j in range(C):
+            if board[i][j] == "O":
+                for y, x in [(0, 0),(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                    ny, nx = y+i, x+j
+                    if 0 <= ny < R and 0 <= nx < C:
+                        bom_1[ny][nx] = '.'
+    
+    bom_2 = [["O"]*C for _ in range(R)] # 두 번째 폭탄 터짐
+    for i in range(R):
+        for j in range(C):
+            if bom_1[i][j] == "O":
+                for y, x in [(0, 0),(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                    ny, nx = y+i, x+j
+                    if 0 <= ny < R and 0 <= nx < C:
+                        bom_2[ny][nx] = '.'
+                        
+    if N%4==3:
+        for li in bom_1: print(''.join(li))
+    if N%4==1:
+        for li in bom_2: print(''.join(li))
 
 
