@@ -17,7 +17,7 @@
 '''
 ### 해결 코드
 
-""" from re import S
+""" 
 import sys
 input = sys.stdin.readline
 

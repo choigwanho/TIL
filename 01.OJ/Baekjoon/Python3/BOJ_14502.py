@@ -26,11 +26,6 @@ q = deque()
 def bfs():
     global result
 
-
-
-
-
 for i in range(n):
     for j in range(m):
         continue
-
