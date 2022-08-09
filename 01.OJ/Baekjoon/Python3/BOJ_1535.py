@@ -19,12 +19,15 @@
 ## 해결코드
 ```Python
 '''
+
 import sys
 si = sys.stdin.readline
 
 N = int(si())
 L = [map(int, si().split())]
 J = [map(int, si().split())]
+pick = []
 
-L 선택의 합 < 100
+    
+
 
