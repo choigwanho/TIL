@@ -26,8 +26,14 @@ si = sys.stdin.readline
 N = int(si())
 L = [map(int, si().split())]
 J = [map(int, si().split())]
-pick = []
 
+
+def recur():
     
 
+a1 = 
 
+if 합 < 100:
+    check[i]=1
+else:
+    
