@@ -17,8 +17,26 @@
 
 ```
 
-## 해결코드
+## 마지막 코드
 ```Python
+'''
+def solution(topping):
+    tp = set(topping) 
+    answer = 0
+    
+    for i in range(1,len(topping)):
+        yb = len(set(topping[:i]))
+        ob = len(set(topping[i:]))
+        if yb==ob:
+            answer += 1
+        if yb>ob:
+            break
+    return answer
+
+solution([1,2,3,1,4])
+
+
+# 시간초과 코드 1
 '''
 def solution(topping):
     answer = 0
@@ -26,14 +44,14 @@ def solution(topping):
     for i in range(1,len(topping)):
         yb = len(set(topping[:i]))
         ob = len(set(topping[i:]))
-        print(yb,ob)
         if yb==ob:
             answer += 1
     return answer
 
 solution([1,2,3,1,4])
+'''
 
-# 시간초과 코드
+# 시간초과 코드 2
 '''
 from collections import Counter
 def solution(topping): # 100만 

@@ -9,11 +9,10 @@
 - 삼총사를 만드는 경우의 수를  출력
 
 2. 복잡도
-- 시간 초과
-=> 
+- O(nP3) = n 조건이 기억이 안남 >> 가능
 
 3. 자료구조
--
+- answer: int
 
 ```
 
@@ -24,7 +23,6 @@
 # [-2,3,0,2,-5]
 # [-3,-2,1,0,1,2,3]
 # [-1,1,-1,1]
-
 def solution(number):
     end = len(number)
     answer = 0
@@ -35,5 +33,32 @@ def solution(number):
                     print(number[i],number[j],number[k])
                     answer+=1
     return answer
+    
+
+# 시간 초과 코드 -> 메모이제이션 ? 관련해서 개선하면 풀 수 있는지 확인하고 싶음
+'''
+answer = 0
+def solution(number):
+    memo=[]
+    check = [0 for _ in range(len(number))]
+    
+    def recur(chosen):
+        global answer
+        if len(chosen)==3 and sum(chosen)==0:
+            answer +=1
+            print(check,answer)
+            return
+
+        for i in range(len(number)):
+            if not check[i]:                                          
+                check[i]=1
+                chosen.append(number[i])
+                recur(chosen)
+                chosen.pop()
+                check[i]=0
+
+    recur([])
+    return answer//6
 
 solution([-2,3,0,2,-5])
+'''
