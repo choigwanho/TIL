@@ -16,24 +16,21 @@
 
 ## 해결코드
 ```Python
+
+    if dp[n+1] - n*n >=0:
+        dp[n] = dp[n+1] - n*n
+        print(dp[n])
 '''
 import sys
 si = sys.stdin.readline
 
 N = int(si())
-rg = 0
-tmp = 0
-ans = float('inf')
-for i in range(int(N**(1/2))+1):
-    for j in range(i+1):
-        for k in range(j+1):
-            for m in range(k+1):
-                if i*i + j*j + k*k + m*m == N:
-                    if i: tmp+=1
-                    if j: tmp+=1
-                    if k: tmp+=1
-                    if m: tmp+=1
-                    ans = min(ans,tmp) 
-                    tmp = 0 
-print(ans)           
+dp = [0]*(N+1)
+dp[1] = 1
 
+for i in range(2, N+1):
+    m = 4
+    for j in range(1, int(i**(1/2))+1):
+        m = min(m,dp[i-(j**2)])
+    dp[i] = m + 1
+print(dp[N])
