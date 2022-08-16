@@ -24,16 +24,15 @@ import sys
 si = sys.stdin.readline
 
 N = int(si())
-L = [map(int, si().split())]
-J = [map(int, si().split())]
+L = [0]+list(map(int, si().split()))
+J = [0]+list(map(int, si().split()))
 
+dp = [[0]*101 for _ in range(N+1)]
 
-def recur():
-    
-
-a1 = 
-
-if 합 < 100:
-    check[i]=1
-else:
-    
+for i in range(1,N+1):
+    for j in range(1,101):
+        if L[i]<=j:
+            dp[i][j] = max(dp[i-1][j], dp[i-1][j-L[i]]+J[i])
+        else:
+            dp[i][j] = dp[i-1][j]
+print(dp[N][99])    
