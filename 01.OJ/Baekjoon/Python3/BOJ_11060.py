@@ -22,18 +22,35 @@ si = sys.stdin.readline
 
 N = int(si())
 A = list(map(int,si().split()))
-dp = list(0 for _ in range(N+1))
-
+dp = [N+1]*N
+dp[0]=0
 for i in range(N):
-    
+    for j in range(1,A[i]+1):
+        if i+j >= N:
+            break       
+        dp[i+j] = min(dp[i+j],dp[i]+1) 
+print(dp[N-1] if dp[N-1]!=N+1 else -1)
 
-while q:
-    now, ndx = q.popleft()
-    for i in range(now+1):
-        idx = ndx + i
-        if 0<= idx < N:
-            if not visited[idx]:
-                visited[idx] = 1
-                q.append((A[idx],idx))
-print(visited)
-        
+
+'''
+n = int(input())
+lst = list(map(int, input().split()))
+
+dp = [-1] * n
+
+def bfs(start):
+    q = []
+    q.append(start)
+    dp[start] = 0
+    while q:
+        now = q.pop(0)
+        jump = lst[now]
+        for i in range(jump, 0, -1):
+            if now + i < n and dp[now + i] == -1:
+                dp[now + i] = dp[now] + 1
+                q.append(now + i)
+
+bfs(0)
+print(dp[-1])
+
+'''
