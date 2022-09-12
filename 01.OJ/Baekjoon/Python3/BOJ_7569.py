@@ -71,32 +71,35 @@ import sys
 input = sys.stdin.readline
 
 M, N, H = map(int, input().split())
-storage = [[[map(int, input().split())] for _ in range(N)] for _ in range(H)]
-
-
+storage = list(list(list(map(int, input().split())) for _ in range(N)) for _ in range(H))
+q = deque([])
 dx = [-1,1,0,0,0,0]
 dy = [0,0,-1,1,0,0]
 dz = [0,0,0,0,-1,1]
+ans = 0
 
-def bfs(tz,ty,tx):
-    q = deque()
-    q.append([tz,ty,tx])
-    while q:
-        z, y, x = q.popleft()
-
-        for i in range(6):
-            nz, ny, nx = z + dz[i], y + dy[i], x + dx[i]
-            if 0<= nz <H and 0<= ny <N and 0<= nx <M:
-                if storage[nz][ny][nx] == 0:
-
-                if storage[nz][ny][nx] == -1:
-
-    return
-
-
-for k in range(H):
+for i in range(H):
     for j in range(N):
-        for i in range(M):
-            if storage[k][j][i] == 1: # 익은 토마토에서 BFS
-                bfs(k,j,i)
+        for k in range(M):
+            if storage[i][j][k] == 1:
+                q.append((i,j,k))
+
+while q:
+    z, y, x = q.popleft()
+    for i in range(6):
+        nz, ny, nx = z + dz[i], y + dy[i], x + dx[i]
+        if 0<= nz <H and 0<= ny <N and 0<= nx <M and storage[nz][ny][nx] == 0:
+            storage[nz][ny][nx] = storage[z][y][x] + 1
+            q.append((nz,ny,nx))   
+
+for i in range(H):
+    for j in range(N):
+        for k in range(M):
+            if storage[i][j][k] == 0: 
+                print(-1)
+                exit(0)
+            else:
+                if ans<storage[i][j][k]:
+                    ans = storage[i][j][k]
+print(ans -1)
 
