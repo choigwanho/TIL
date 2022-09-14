@@ -1,15 +1,21 @@
 '''
-* 14502 연구소
-* https://www.acmicpc.net/problem/14502
-1. 아이디어
-- 벽은 3개만 세울수 있다.
-- 2의 상하좌우==0 인 경우를 모두 카운팅해본다. 3개 이상이다 아니다로 일단 구분
--
+# [BOJ_14502 연구소 -Python3](https://www.acmicpc.net/problem/14502)
+
+## 문제분석
+```Python
+1. 관찰
+- 
+
 2. 복잡도
 -
+
 3. 자료구조
 -
--
+
+```
+
+## 해결코드
+```Python
 '''
 from collections import deque
 import sys
