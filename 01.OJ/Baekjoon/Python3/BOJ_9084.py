@@ -33,3 +33,5 @@ for _ in range(int(si())):
         M = M%coin
 
     print(answer)
+
+    
