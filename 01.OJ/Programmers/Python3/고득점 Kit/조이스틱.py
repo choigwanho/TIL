@@ -32,7 +32,6 @@
 '''
 
 from collections import deque
-from string import capwords
 
 def bfs(name):
     q = deque([(list(name), 0, 0)])
@@ -51,29 +50,6 @@ def bfs(name):
 def solution(name):
     up_cnt = sum([min(abs(ord('A')-ord(n)), 26-abs(ord('A')-ord(n))) for n in name])
     lr_cnt = bfs(name)
-    print("lr_cnt : ", lr_cnt)
     return up_cnt + lr_cnt
 
 
-testcase = ["DYAOAAAARQANAWA"]
-for name in testcase:
-    print("len of name: ",len(name))
-    print(solution(name))
-
-
-"AAABABAAAB", ["AAB","AA","AAB","BAA"] 
-
-AAABABAAAB
-idx
-
-dp = [r len(0 fostring)+1]
-
-while q:
-    for i range(idx+1, len())
-    idx:i in words:
-
-cards 1,2, 3 343
-패턴 [2,1,5,]
-
-i, v enumarate(패턴)
-최소값 
