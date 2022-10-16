@@ -146,6 +146,8 @@ for _ in range(T):
         graph[node]
     for _ in range(m): # 0(n) 50,000
         a, b, d = map(int,si().split()) # 두 개의 노드와 그 사이 거리
+        if (a == g and b == h) or (a == h and b == g):
+            d -= 0.01
         graph[a][b] = d
         graph[b][a] = d
 
@@ -153,19 +155,11 @@ for _ in range(T):
     target_list = [int(si()) for _ in range(t)] # 0(n) 1,000
 
     s_distances = dijkstraByAdjacencyList(graph, s)
-
-
-    gh_distance = graph[h][g]
-
-    # 중복된 이동을 제거하기 위해 필수 통로 제거
-    graph[g].pop(h)
-    graph[h].pop(g)
-
     answer = []
     for target in target_list:
-        target_distances = dijkstraByAdjacencyList(graph, target)
-        if s_distances[target] >=  min(s_distances[g] + gh_distance + target_distances[h], s_distances[h] + gh_distance + target_distances[g]): # s-g-h-목적지 거리가 최단거리보다 작거나 같으면 가능
-             answer.append(target)
+        print(isinstance(s_distances[target], float))
+        if isinstance(s_distances[target], float):
+            answer.append(target)
 
     print(*sorted(answer))
 
