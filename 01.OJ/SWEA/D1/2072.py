@@ -1,3 +1,4 @@
+# 홀수만 더하기
 T = int(input())
 for test_case in range(1, T + 1):
     tc = list(map(int,input().split()))
