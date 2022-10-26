@@ -17,33 +17,43 @@
 ## 해결코드
 ```Python
 '''
+
+
+
+
 def dijkstra(start):
-    distances = {node:int(1e9) for node in dis_dic}
-    distances[start] = 0
     q = []
-    heapq.heappush(q,[distances[start],start])
-
+    heapq.heappush(q,(0,start))
+    distance[start] = 0
     while q:
-        cur_dis, cur_v = heapq.heappop(q)
-            
-        for new_v, new_dis in dis_dic[cur_v]:
-            distance = cur_dis + new_dis
-            if distance < distances[new_v]:
-                distances[new_v] = distance
-                heapq.heappush(q,[distance,new_v])
+        dist, now = heapq.heappop(q)
 
-    return distances
+        if dist > distance[now]:
+            continue
 
+        for i in graph[now]:
+            cost = dist + i[1]
+            if cost < distance[i[0]]:
+                distance[i[0]] = cost
+                heapq.heappush(q,(cost, i[0]))
 
-import sys, heapq
-from collections import defaultdict
-si = sys.stdin.readline
+import heapq
+import sys
+input = sys.stdin.readline
 
-n, d = map(int,si().split()) # e, total_dis
+n , d = map(int,input().split())
+graph = [[] for _ in range(d+1)]
+INF = int(1e9)
+distance = [INF] * (d+1)
 
-dis_dic = defaultdict(list)
+for i in range(d):
+    graph[i].append((i+1, 1))
+    
 for _ in range(n):
-    v1,v2,dis = map(int,si().split())
-    dis_dic[v1].append((v2,dis))
-    dis_dic[v2].append((v1,dis))
+    s, e, l = map(int,input().split())
+    if e > d:
+        continue
+    graph[s].append((e,l))
 
+dijkstra(0)
+print(distance[d])
