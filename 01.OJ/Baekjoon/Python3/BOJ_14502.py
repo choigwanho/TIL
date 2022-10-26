@@ -18,38 +18,33 @@
 ```Python
 '''
 
-def virus(arr, i, j, visited):
-    q = deque([(i,j)])
-    visited[i][j]=1
-    arr[i][j]=2
-    while q:
-        x,y = q.popleft()
-        for i in range(4):
-            nx,ny = x+dx[i], y+dy[i]
-            if nx<0 or nx>=n or ny<0 or ny>=m:
-                continue
-            if not visited[nx][ny] and arr[nx][ny]!=1:
-                visited[nx][ny]=1
-                arr[nx][ny]=2
-                q.append((nx,ny))
-
-def safeArea(arr, i, j,visited):
-    q = deque([(i,j,0)])
-    visited[i][j]=1
+def cntSafe():
     rst = 0
-    while q:
-        x,y,cnt = q.popleft()
-        for i in range(4):
-            nx,ny = x+dx[i], y+dy[i]
-            if nx<0 or nx>=n or ny<0 or ny>=m:
-                continue
-            if not visited[nx][ny] and arr[nx][ny]==0:
-                visited[nx][ny]=1
-                q.append((nx,ny,cnt+1))
-                rst = cnt+1
-    for i in range(n):
-        print(lab_copy[i])
+    for w1,w2,w3 in case_list: # 4만
+
+        lab_copy = copy.deepcopy(lab)
+        lab_copy[w1[0]][w1[1]] = 1
+        lab_copy[w2[0]][w2[1]] = 1
+        lab_copy[w3[0]][w3[1]] = 1
+
+        q = deque(virus_spot) # *64
+        while q:
+            x,y = q.popleft()
+            for i in range(4):
+                nx,ny = x+dx[i], y+dy[i]
+                if nx<0 or nx>=n or ny<0 or ny>=m:
+                    continue
+                if lab_copy[nx][ny]==0: # +64
+                    lab_copy[nx][ny]=2
+                    q.append((nx,ny))
+        
+        zero_cnt = 0
+        for i in range(n): # +8
+            zero_cnt += lab_copy[i].count(0)
+        
+        rst = max(rst,zero_cnt)
     return rst
+
 
 from collections import deque
 import sys,copy
@@ -70,25 +65,9 @@ for r in range(n):
         elif c==2:
             virus_spot.append((r,i))
 
-
-case_list = list(combinations(zero_spot,3))
+case_list = list(combinations(zero_spot,3)) # 0의 좌표 3개의 조합 완전 탐색 (64*63*63)//(3*2) = 약 4만
 
 dx = [-1,1,0,0]
 dy = [0,0,-1,1]
 
-ans = 0
-for w1,w2,w3 in case_list:
-    visited = [[0 for _ in range(m)] for _ in range(n)]
-    lab_copy = copy.deepcopy(lab)
-    lab_copy[w1[0]][w1[1]] = 1
-    lab_copy[w2[0]][w2[1]] = 1
-    lab_copy[w3[0]][w3[1]] = 1
-
-    for vx,vy in virus_spot:
-        if not visited[vx][vy] and lab_copy[vx][vy] == 2:
-            virus(lab_copy,vx,vy,visited)
-         
-    for zx,zy in zero_spot:
-            if not visited[zx][zy] and lab_copy[zx][zy] == 0:
-                ans = max(ans,safeArea(lab_copy,zx,zy,visited))
-print(ans)
+print(cntSafe())
