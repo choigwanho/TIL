@@ -28,6 +28,7 @@
 ## 해결코드
 ```Python
 '''
+'''
 from collections import deque
  
 def bfs(tree, start, visited):
@@ -61,3 +62,43 @@ def solution(n, wires):
             answer = result
 
     return answer
+'''
+
+'''
+from collections import deque
+
+def bfs(tree,n):
+    visited = [[0 for _ in range(n+1)] for _ in range(n+1)]
+    q = deque([])
+    for i in range(n+1):
+        for j in range(n+1):
+            if not visited[i][j]:
+                q.append((i,j))
+    
+    while q:
+
+def solution(n, wires):
+    answer = -1
+
+    tree = [[0 for _ in range(n+1)] for _ in range(n+1)]
+    
+    for v1,v2  in wires:
+        tree[v1][v2] = 1
+        tree[v2][v1] = 1
+    
+    for v1,v2 in wires:
+        
+        
+    
+
+
+
+    return answer
+
+testcase = [[9,	[[1,3],[2,3],[3,4],[4,5],[4,6],[4,7],[7,8],[7,9]]], # 3
+            [4,	[[1,2],[2,3],[3,4]]],                               # 0
+            [7,	[[1,2],[2,7],[3,7],[3,4],[4,5],[6,7]]]]             # 1
+for n, wires in testcase:
+    print(solution(n,wires)) 
+
+'''
