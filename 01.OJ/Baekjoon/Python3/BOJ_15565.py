@@ -11,6 +11,8 @@
 - 라이언 인형이 연속된 집합을 찾는다.
 - K개 이상 있다?
 
+- 인형의 개수가 1e6(백만) 임으로 선형 복잡도로 해결해야한다.
+
 2. 복잡도
 -
 
@@ -26,19 +28,26 @@ import sys
 si = sys.stdin.readline
 
 N,K = map(int,si().split()) # 1e6
-doll = list(map(int,si().split()))
+data = list(map(int,si().split()))
 
-ans = -1
+
+
 
 start = 0
+end = 0
+
+internal_cnt = 0 
+ans = N
+
 for i in range(start,N): # 1e6
-    cnt = 0
-    for j in range(i+1,N):
-        if doll[j]==1:
-            cnt += 1
-        if cnt >= K:
-            ans=j-i
+    while internal_cnt < K and end < N:
+        
+        if data[end]==1:
+            internal_cnt+=1
 
+        if internal_cnt >= K:
+            print(end-start+1)
+            ans = min(ans,end-start+1)
+        print(start, end, internal_cnt)
+        end+=1
 print(ans)
-
-

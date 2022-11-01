@@ -1,45 +1,46 @@
-/*
-* 2022.05.17
-* BOJ_15651
-* 완전탐색 (Brute Force)
-* 시간 : O(N**M) => 7**7 = 82만
-* 공간 : O(M)
-* */
-
 import java.io.*;
 import java.util.*;
 
-public class BOJ_15651{
+public class BOJ_15566 {
     static StringBuilder sb = new StringBuilder();
+    static FastReader scan = new FastReader();
 
+    static int N, K;
+    static int[] A;
+    
     static void input(){
-        FastReader scan = new FastReader();
         N = scan.nextInt();
-        M = scan.nextInt();
-        selected = new int[M + 1];
-    }
-
-    static int N,M;
-    static int[] selected;
-
-    static void rec_func(int k){
-        if (k == M + 1 ){
-            for (int i =1; i<=M;i++) sb.append(selected[i]).append('');
-            sb.append('\n')
-        } else {
-            for (int cand =1; cand <= N; cand++){
-                selected[k]=cand;
-                rec_func(k+1);
-                selected[k]=0;
-            }
+        K = scan.nextInt();
+        A = new int[N+1];
+        for (int i =1; i <= N; i++){
+            A[i] = scan.nextInt();
         }
     }
 
+    static void pro(){
+        int R = 0, sum = 0, ans = -1;
+        for (int L = 1; L <= N; L++){
+            while (R < N && sum < K){ // K개의 라이언이 될 때까지 더하기, 끝에서 종료
+                R++;
+                if (A[R]==1) sum++;
+            }
+                
+            if (sum == K){ // K개의 라이언이 있는 경우
+                if (ans==-1) ans = R-L+1; // 처음은 초기화
+                ans = Math.min(ans, R-L+1); // 최소값 갱신
+            }
+
+            if (A[L]==1) sum--; // 다음을 카운팅을 위해서 왼쪽 지우기
+        }
+
+        System.out.println(ans);  
+    }
+    
     public static void main(String[] args){
         input();
-        rec_func(1);
+        pro();
     }
-
+    
     static class FastReader {
         BufferedReader br;
         StringTokenizer st;

@@ -1,44 +1,44 @@
-/*
-* 2022.05.17
-* BOJ_15651
-* 완전탐색 (Brute Force)
-* 시간 : O(N**M) => 7**7 = 82만
-* 공간 : O(M)
-* */
-
 import java.io.*;
 import java.util.*;
 
-public class BOJ_15651{
+public class BOJ_1806 {
     static StringBuilder sb = new StringBuilder();
+    static FastReader scan = new FastReader();
 
+    static int n, S;
+    static int[] a;
+    
     static void input(){
-        FastReader scan = new FastReader();
-        N = scan.nextInt();
-        M = scan.nextInt();
-        selected = new int[M + 1];
-    }
-
-    static int N,M;
-    static int[] selected;
-
-    static void rec_func(int k){
-        if (k == M + 1 ){
-            for (int i =1; i<=M;i++) sb.append(selected[i]).append('');
-            sb.append('\n')
-        } else {
-            for (int cand =1; cand <= N; cand++){
-                selected[k]=cand;
-                rec_func(k+1);
-                selected[k]=0;
-            }
+        n = scan.nextInt();
+        S = scan.nextInt();
+        a = new int[n+1];
+        for (int i =1; i <= n; i++){
+            a[i] = scan.nextInt();
         }
     }
 
+    static void pro(){
+        int R = 0, sum = 0, ans = n + 1;
+        for (int L = 1; L <= n; L++){
+            sum -= a[L-1];
+
+            while (R+1 <= n && sum < S)
+                sum += a[++R];
+            
+            if (sum >= S)
+                ans = Math.min(ans, R - L + 1);
+        }
+
+        if (ans == n+1)
+            ans = 0;
+        System.out.println(ans);  
+    }
+    
     public static void main(String[] args){
         input();
-        rec_func(1);
+        pro();
     }
+
 
     static class FastReader {
         BufferedReader br;

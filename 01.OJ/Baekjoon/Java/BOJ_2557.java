@@ -1,4 +1,4 @@
-public class BOJ_BRZ05_2557{
+public class BOJ_2557{
     public static void main(String[] args){
         baekjoon_2557();
         
