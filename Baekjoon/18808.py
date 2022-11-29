@@ -40,15 +40,66 @@
 ```Python
 '''
 
+# 스티커를 시계방향으로 90도씩 회전시킨다.
+def rotate90(r,c,s):
+    rotated_s = [[0]*r for _ in range(c)] # r,c가 회전함
+    for i in range(c):
+        for j in range(r):
+            rotated_s[i][j] = s[r-j-1][i]
+    return (c,r,rotated_s)
 
+# 현재 위치에 스티커를 붙일 수 있는지 확인
+def is_attachable(r,c,s,x,y):
+    for i in range(r):
+        for j in range(c):
+            if s[i][j] ==1 and notebook[x+i][y+j]==1:
+                return False
+    return True
 
+# 현재 위치에 스티커 부착
+def attach(r,c,s,x,y):
+    for i in range(r):
+        for j in range(c):
+            if s[i][j]==1:
+                notebook[x+i][y+j]=1
 
-from itertools import product
+def simulate(sticker):
+    global N,M
+    r,c,s,cnt = sticker
+
+    while cnt<4:
+
+        # 1. 스티커를 회전시키지 않고 모눈종이에서 때어낸다. ( = 방향을 유지한다.)
+        # 예외처리 스티거가 회전하여 노트북 범위를 벗어나면 붙일 수 없으므로 회전
+        if r > N or c > M:
+            r,c,s = rotate90(r,c,s)
+            continue
+
+        # 2. 스티커를 붙일 수 있는 위치에서 가능한 가장 위쪽, 왼쪽의 위치에 붙인다.
+        is_attached = False
+        for i in range(N-r+1):
+            for j in range(M-c+1):
+                if is_attachable(r,c,s,i,j):
+                    attach(r,c,s,i,j)
+                    is_attached= True
+                    break
+            if is_attached:
+                break
+        if is_attached:
+            break
+        else:
+            # 3. 스티커 회전
+            r,c,s = rotate90(r,c,s)
+            cnt += 1
+
 import sys
 si = sys.stdin.readline
 
 # 노트북의 세로, 가로, 스티커의 개수
-N,M,K = tuple(map(int,si().split()))
+N,M,K = map(int,si().split())
+
+# 스티커를 붙일 노트북 배열 초기화
+notebook = [[0]*M for _ in range(N)]
 
 # K개의 스티커 정보 저장
 stickers = []
@@ -58,59 +109,15 @@ for i in range(K):
     # (r,c,sticker,cnt) 모눈종이의 세로, 가로, 스티커, 회전 횟수
     stickers.append((r,c,sticker,0))
 
-# 스티커를 노트북에 붙여서 채워진 칸의 수
-ans = 0 
-
-# 스티커를 시계방향으로 90도씩 회전시킨다.
-def rotate90(r,c,s):
-    rotated_sticker = []
-    for i in range(r):
-        for j in range(c):
-            print()
-    return rotated_sticker
-
-# 스티커를 붙일 수 있는 위치 탐색
-def find_pos(s,d):
-
-    return list()
-    return []
-
-def simulate(sticker):
-    r,c,s,cnt = sticker
-
-    while (cnt<4):
-
-        # 1. 스티커를 회전시키지 않고 모눈종이에서 때어낸다. ( = 방향을 유지한다.)
-
-        # 2-1. 스티커 정보를 넘겨 붙일 수 있는 위치를 찾는다.
-        pos = sorted(list(product(range(N-r+1),range(M-c+1))),key= lambda x:(x[0],[1]),reverse=True) if cnt%2==0 else sorted(list(product(range(N-r+1),range(M-c+1))), key= lambda x:(x[0],[1]),reverse=True)
-
-        # 2-2. 붙일 수 있는 곳중에서 가능한 가장 위쪽, 왼쪽의 위치에 붙인다.
-        for x,y in pos:
-            # 해당 위치에서 스티커가 겹치지 않는지 확인
-            
-            
-        
-
-
-        # 3. 스티커 회전
-        cnt += 1
-        s = rotate90(r,c,s)
-
-
-
-
-    print(sticker)
-
 # i번째 스티커를 노트북에 붙이기 
 for i in range(K):
-
-    
     simulate(stickers[i])
 
-print()
+# 스티커를 노트북에 붙여서 채워진 칸의 수 저장
+ans = 0 
+for i in range(N):
+    for j in range(M):
+        if notebook[i][j]==1:
+            ans+=1
 
-
-
-
-
+print(ans)
