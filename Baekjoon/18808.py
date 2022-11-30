@@ -63,8 +63,8 @@ def attach(r,c,s,x,y):
             if s[i][j]==1:
                 notebook[x+i][y+j]=1
 
+# i번째 스티커 붙이기 구현
 def simulate(sticker):
-    global N,M
     r,c,s,cnt = sticker
 
     while cnt<4:
@@ -95,6 +95,7 @@ def simulate(sticker):
 import sys
 si = sys.stdin.readline
 
+        
 # 노트북의 세로, 가로, 스티커의 개수
 N,M,K = map(int,si().split())
 

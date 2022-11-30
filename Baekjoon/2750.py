@@ -1,7 +1,3 @@
-
-import sys
-input = sys.stdin.readline
-
 # 2750 수 정렬하기
 # https://www.acmicpc.net/problem/2750
 '''
@@ -16,9 +12,7 @@ sorted()는 새로운 정렬된 리스트 반환
 sort는 기존 리스트에 정렬(in-place)
 참조: https://docs.python.org/ko/3/howto/sorting.html
 '''
-def sol2750():
-    n=int(input())
-    nums=list(int(input().rstrip()) for _ in range(n))
 
-    for n in sorted(nums):
-        print(n)
+import sys
+si = sys.stdin.readline
+print(*sorted(list(int(si()) for _ in range(int(si())))),sep="\n")
