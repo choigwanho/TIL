@@ -42,11 +42,7 @@
 
 # 스티커를 시계방향으로 90도씩 회전시킨다.
 def rotate90(r,c,s):
-    rotated_s = [[0]*r for _ in range(c)] # r,c가 회전함
-    for i in range(c):
-        for j in range(r):
-            rotated_s[i][j] = s[r-j-1][i]
-    return (c,r,rotated_s)
+    return (c,r,list(list(s[r-j-1][i] for j in range(r)) for i in range(c)))
 
 # 현재 위치에 스티커를 붙일 수 있는지 확인
 def is_attachable(r,c,s,x,y):
@@ -73,6 +69,7 @@ def simulate(sticker):
         # 예외처리 스티거가 회전하여 노트북 범위를 벗어나면 붙일 수 없으므로 회전
         if r > N or c > M:
             r,c,s = rotate90(r,c,s)
+            cnt+=1
             continue
 
         # 2. 스티커를 붙일 수 있는 위치에서 가능한 가장 위쪽, 왼쪽의 위치에 붙인다.
@@ -83,10 +80,8 @@ def simulate(sticker):
                     attach(r,c,s,i,j)
                     is_attached= True
                     break
-            if is_attached:
-                break
-        if is_attached:
-            break
+            if is_attached: break
+        if is_attached: break
         else:
             # 3. 스티커 회전
             r,c,s = rotate90(r,c,s)
@@ -94,7 +89,6 @@ def simulate(sticker):
 
 import sys
 si = sys.stdin.readline
-
         
 # 노트북의 세로, 가로, 스티커의 개수
 N,M,K = map(int,si().split())

@@ -23,7 +23,6 @@ dx = [-1,1,0,0]
 dy = [0,0,-1,1]
 
 q = deque([(0,0)])
-result = 0
 
 while q:
     x,y=q.popleft()
