@@ -10,8 +10,8 @@ si = sys.stdin.readline
 p, n = map(int, si().split()) # 증가율 p, 총 시간 n(초)
 virus = list(map(int, si().split())) # 매초 침입하는 바이러스의 숫자 a
  
-ans = 1
-for v in virus:
-    ans = v%int(1e9+7)
-
-print()
+ans = virus[0]
+for i in range(1,n):
+    ans = (ans*p)%1000000007
+    ans += virus[i]
+print(ans)
