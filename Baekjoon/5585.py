@@ -30,3 +30,19 @@ m = 1000-pay
 
 payback = [m//500,m%500//100,m%500%100//50,m%500%100%50//10,m%500%100%50%10//5,m%500%100%50%10%5]
 print(sum(payback))
+
+
+
+import sys
+si = sys.stdin.readline
+
+n = int(si()) # 지불할 돈
+l = [500,100,50,10,5,1]
+
+m = 1000-n
+cnt = 0
+for cash in l:
+    cnt += m//cash
+    m = m%cash
+
+print(cnt)

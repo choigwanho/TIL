@@ -13,7 +13,7 @@
 - 방문기록: bool[][]
 ```
 ## 해결 코드
-'''
+
 from collections import deque
 import sys
 input = sys.stdin.readline
@@ -28,6 +28,48 @@ for _ in range(m):
     graph[v2].append(v1)
 
 for e in graph:
+    e.sort()
+
+visited_b =[False]*(n+1)
+visited_d =[False]*(n+1)
+
+def dfs(start):
+    visited_d[start] = True
+    print(start, end=' ')
+    for i in graph[start]:
+        if not visited_d[i]:
+            dfs(i)
+
+def bfs(start):
+    q = deque([start])
+    visited_b[start] = True
+    while q:
+        n = q.popleft()
+        print(n, end=' ')
+        for i in graph[n]:
+            if not visited_b[i]:
+                visited_b[i] = True
+                q.append(i)
+
+dfs(v)
+print()
+bfs(v)
+'''
+
+
+from collections import deque
+import sys
+si = sys.stdin.readline
+
+n,m,v = map(int,si().split()) # 정점의 개수, 간선의 개수, 탐색을 시작할 정점의 번호
+graph = [[] for _ in range(n+1)]
+
+for _ in range(m):
+    v1, v2 = map(int,si().split())
+    graph[v1].append(v2)
+    graph[v2].append(v1)
+
+for e in graph: # 작은 번호 먼저 방문
     e.sort()
 
 visited_b =[False]*(n+1)
