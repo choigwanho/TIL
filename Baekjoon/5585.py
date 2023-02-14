@@ -22,6 +22,8 @@
 ## 해결코드
 ```Python
 '''
+
+# sol 1
 import sys
 si = sys.stdin.readline
 
@@ -32,7 +34,7 @@ payback = [m//500,m%500//100,m%500%100//50,m%500%100%50//10,m%500%100%50%10//5,m
 print(sum(payback))
 
 
-
+# sol 2
 import sys
 si = sys.stdin.readline
 
